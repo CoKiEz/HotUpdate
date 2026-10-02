@@ -104,3 +104,26 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# =========================================================
+# HybridCLR
+# =========================================================
+
+# HybridCLR generated data / local il2cpp / build cache
+/[Hh]ybridCLRData/
+
+
+# =========================================================
+# YooAsset
+# =========================================================
+
+# YooAsset build output
+/[Bb]undles/
+
+# YooAsset generated StreamingAssets data
+# 如果你使用 YooAsset 的 BuildinFileSystem，
+# StreamingAssets 下这些通常是构建生成物
+/[Aa]ssets/[Ss]treamingAssets/yoo/
+
+# YooAsset temporary/cache folders if generated
+/[Aa]ssets/[Yy]ooAssetTemp/
