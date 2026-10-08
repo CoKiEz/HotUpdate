@@ -7,6 +7,8 @@ public class LoadDllScripts : MonoBehaviour
 {
     private string packageName = "HotUpdateDlls";
     private string dllFullAssetPath = "Assets/HotUpdateDlls/HotUpdate.dll.bytes";
+    private string defaultHostServer = "http://127.0.0.1:8080/CDN/PC/"; //本地服务器路径 配合Tomcat使用
+    private string defaultVersion = "v1.0";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,14 +27,19 @@ public class LoadDllScripts : MonoBehaviour
         YooAssets.Initialize();
         //获取资源包 没有的话就直接创建一个新的
         var package = YooAssets.TryGetPackage(packageName,out var packageObj) ? packageObj : YooAssets.CreatePackage(packageName);
-        
+        //创建服务器远程服务实例
+        var remoteService = new RemoteService(defaultHostServer);
+
         ///配置并初始化文件系统
-        //离线模式
-        var createParameters = new OfflinePlayModeOptions();
+        //离线模式 -> 联机模式
+        //var createParameters = new OfflinePlayModeOptions();
+        var createParameters = new HostPlayModeOptions();
         //创建一个默认的系统文件组  方便读取
         createParameters.BuiltinFileSystemParameters = FileSystemParameters.CreateDefaultBuiltinFileSystemParameters();
         //拷贝到沙盒
         createParameters.BuiltinFileSystemParameters.AddParameter(EFileSystemParameter.CopyBuiltinPackageManifest,true);
+        //绑定远程服务
+        createParameters.CacheFileSystemParameters = FileSystemParameters.CreateDefaultSandboxFileSystemParameters(remoteService);
         //初始化资源包
         var initOp = package.InitializePackageAsync(createParameters);
         yield return initOp;
