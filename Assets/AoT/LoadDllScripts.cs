@@ -1,19 +1,17 @@
 using System;
 using System.Collections;
 using System.Reflection;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 using YooAsset;
 public class LoadDllScripts : MonoBehaviour
 {
-    private TextAsset dllText;
     private string packageName = "HotUpdateDlls";
-    private string dllFullAssetPath = "Asset/HotUpdateDlls/HotUpdateDlls.dll.bytes";
+    private string dllFullAssetPath = "Assets/HotUpdateDlls/HotUpdateDlls.dll.bytes";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(StartHot());
-
-        
     }
 
     // Update is called once per frame
@@ -24,10 +22,12 @@ public class LoadDllScripts : MonoBehaviour
 
     IEnumerator StartHot()
     {
-        //初始化
+        //初始YooAssets的全局资源系统
         YooAssets.Initialize();
-        //如果能够得到Package就直接获取  没有的话就直接创建一个新的
+        //获取资源包 没有的话就直接创建一个新的
         var package = YooAssets.TryGetPackage(packageName,out var packageObj) ? packageObj : YooAssets.CreatePackage(packageName);
+        
+        ///配置并初始化文件系统
         //离线模式
         var createParameters = new OfflinePlayModeOptions();
         //创建一个默认的系统文件组  方便读取
@@ -38,8 +38,21 @@ public class LoadDllScripts : MonoBehaviour
         var initOp = package.InitializePackageAsync(createParameters);
         yield return initOp;
 
+        //请求资源包对应的版本号
+        var versionOp = package.RequestPackageVersionAsync();
+        yield return versionOp;
 
-        //加载dll文件
+        //获取版本资源  创建加载参数
+        string packageVersion = versionOp.PackageVersion;
+        var manifestOptions = new LoadPackageManifestOptions(packageVersion,60);
+        var manifestop = package.LoadPackageManifestAsync(manifestOptions);
+        yield return manifestop;
+
+        //根据dllFullAssetPath加载资源
+        var dllHandle = package.LoadAssetAsync<TextAsset>(dllFullAssetPath);
+        yield return dllHandle;
+        //加载dll
+        TextAsset dllText = dllHandle.AssetObject as TextAsset;
         Assembly hotUpdataAss = Assembly.Load(dllText.bytes);
         //通过反射找到名为'Hello'的类
         Type helloType = hotUpdataAss.GetType("Hello");
@@ -47,5 +60,7 @@ public class LoadDllScripts : MonoBehaviour
         MethodInfo helloMethod = helloType.GetMethod("Run");
         //执行方法
         helloMethod.Invoke(null,null);
+        //卸载资源包
+        dllHandle.Release();
     }
 }
