@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Reflection;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 using YooAsset;
 public class LoadDllScripts : MonoBehaviour
 {
     private string packageName = "HotUpdateDlls";
-    private string dllFullAssetPath = "Assets/HotUpdateDlls/HotUpdateDlls.dll.bytes";
+    private string dllFullAssetPath = "Assets/HotUpdateDlls/HotUpdate.dll.bytes";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

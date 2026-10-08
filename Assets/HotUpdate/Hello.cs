@@ -4,7 +4,7 @@ public class Hello
 {
     public static void Run()
     {
-        Debug.Log("MyHeart1");
+        Debug.Log("v1.0.1");
     }
     
 }
