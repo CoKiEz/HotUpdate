@@ -16,7 +16,7 @@ public class RemoteService : IRemoteService
     //构造函数 赋值传入的路径地址
     public RemoteService(string defaultUrl)
     {
-        _defaultUrl = default;
+        _defaultUrl = defaultUrl;
     }
 
 }
