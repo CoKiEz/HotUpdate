@@ -12,7 +12,7 @@ public class LoadDllScripts : MonoBehaviour
     private string defaultVersion = "v1.0";
 
     //单例模式
-    public LoadDllScripts Instance {get;private set;}
+    public static LoadDllScripts Instance {get;private set;}
     public Assembly HotUpdateAssembly {get;private set;}
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -4,7 +4,8 @@ public class Hello
 {
     public static void Run()
     {
-        Debug.Log("v1.1.2 你好啊");
+        GameObject.Find("SquareLeft").transform.Translate(-0.1f,0,0f);
+        GameObject.Find("SquareRight").transform.Translate(0.1f,0,0f);
     }
     
 }
