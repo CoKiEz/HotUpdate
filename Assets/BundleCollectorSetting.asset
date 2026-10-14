@@ -38,3 +38,11 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/HotUpdateDlls/Square1.prefab
+        CollectorGUID: 6d3d112bbe328a644b58eff89231ff25
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
