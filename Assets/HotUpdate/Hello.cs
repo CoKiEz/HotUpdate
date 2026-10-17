@@ -67,7 +67,8 @@ public class Hello
             yield break;
         }
         GameObject prefab3 = dllHandle3.AssetObject as GameObject;
-        GameObject newSword1 = GameObject.Instantiate(prefab3,new Vector3(0,0,0),Quaternion.identity);
+        GameObject newSword1 = GameObject.Instantiate(prefab3,new Vector3(0,-3.5f,0),Quaternion.Euler(new Vector3(-90,-90,0)));
+        newSword1.transform.localScale = new Vector3(8,8,8);
         
 
     }
