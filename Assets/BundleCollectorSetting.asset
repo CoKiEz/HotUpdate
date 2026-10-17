@@ -46,3 +46,27 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/HotUpdateDlls/Square2.prefab
+        CollectorGUID: ff3e7a2bd8eec144ea2885aeaa0747fc
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: "Assets/HotUpdateDlls/\u53EA\u72FC\u6D77\u62A5.jpg"
+        CollectorGUID: 235104711fabfde49bdeb16d961a2b8a
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Knights/Knight_01/Prefabs/Sword1.prefab
+        CollectorGUID: dcd6639ce8d61a4479595e1a8934c909
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
